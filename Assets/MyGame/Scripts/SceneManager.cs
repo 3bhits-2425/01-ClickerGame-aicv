@@ -12,15 +12,9 @@ public class ScoreManager : MonoBehaviour
     public Button clickButton;           // Button, der den Score erhöht
     public Button saveButton;            // Button zum Speichern
     public Button loadButton;            // Button zum Laden
-    public TextMeshProUGUI gameTitle;    // KI-generierter Spielname (z.B. "Super Clicker Deluxe")
 
     void Start()
-    {
-        // KI-generierter Spielname wird gesetzt (diesen Text kannst du durch den von der KI generierten ersetzen)
-        if (gameTitle != null)
-        {
-            gameTitle.text = "Super Clicker Deluxe"; // Beispielinhalt – hier fließt dein KI-generierter Name ein
-        }
+    { 
 
         UpdateScoreText();
 
@@ -36,9 +30,27 @@ public class ScoreManager : MonoBehaviour
     // Diese Methode wird beim Klick auf den "Klick"-Button aufgerufen
     public void AddPoint()
     {
-        score++;
-        UpdateScoreText();
-        Debug.Log("Klick! Neuer Score: " + score);
+        if(score > 10)
+        {
+            score *= 2;
+            UpdateScoreText();
+            Debug.Log("Klick! Neuer Score: " + score);
+        } 
+        
+        if(score > 1000)
+        {
+            score = 0;
+            UpdateScoreText();
+            Debug.Log("Klick! Neuer Score: " + score);
+        }
+
+        else
+        {
+            score++;
+            UpdateScoreText();
+            Debug.Log("Klick! Neuer Score: " + score);
+        }
+        
     }
 
     // Speichert den aktuellen Score mithilfe von PlayerPrefs
